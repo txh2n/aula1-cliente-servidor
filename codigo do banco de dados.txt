@@ -1,0 +1,28 @@
+CREATE DATABASE empresa;
+
+USE empresa;
+
+CREATE TABLE funcionarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    cargo VARCHAR(50)
+);
+
+ALTER TABLE funcionarios
+DROP COLUMN email;
+
+ALTER TABLE funcionarios
+MODIFY cargo VARCHAR(100) NOT NULL;
+
+ALTER TABLE funcionarios
+ADD salario DECIMAL(10,2) NOT NULL,
+ADD setor VARCHAR(100) NOT NULL;
+
+INSERT INTO funcionarios (nome, cargo, salario, setor) VALUES
+('Edniel', 'Gerente', 6000.00, 'TI'),
+('Gustavo Moreira', 'Gerente', 6000.00, 'Administrativo'),
+('Ana Beatriz', 'Assistente', 2500.00, 'Financeiro'),
+('Maria Clara', 'Recepcionista', 1800.00, 'Atendimento');
+
+SELECT * FROM funcionarios;
