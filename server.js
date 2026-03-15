@@ -2,7 +2,10 @@ const express = require("express");
 const cors = require("cors");
 
 const alunosRoutes = require("./routes/alunos.routes");
+<<<<<<< HEAD
 const db = require("./database/database");
+=======
+>>>>>>> b9a8ca6b36d28ddc576c23f73d57ee62037b10c9
 
 const app = express();
 
@@ -12,6 +15,7 @@ app.use(express.static("public"));
 
 app.use("/", alunosRoutes);
 
+<<<<<<< HEAD
 /* LOGIN */
 
 app.post("/login",(req,res)=>{
@@ -74,4 +78,8 @@ app.listen(3000,()=>{
 
 console.log("Servidor rodando na porta 3000");
 
+=======
+app.listen(3000, () => {
+    console.log("Servidor rodando na porta 3000");
+>>>>>>> b9a8ca6b36d28ddc576c23f73d57ee62037b10c9
 });
