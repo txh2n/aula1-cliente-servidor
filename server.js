@@ -2,10 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const alunosRoutes = require("./routes/alunos.routes");
-<<<<<<< HEAD
 const db = require("./database/database");
-=======
->>>>>>> b9a8ca6b36d28ddc576c23f73d57ee62037b10c9
 
 const app = express();
 
@@ -15,7 +12,6 @@ app.use(express.static("public"));
 
 app.use("/", alunosRoutes);
 
-<<<<<<< HEAD
 /* LOGIN */
 
 app.post("/login",(req,res)=>{
@@ -52,25 +48,25 @@ res.json({sucesso:false});
 
 app.post("/usuarios", (req, res) => {
 
-    const { nome, email, senha } = req.body;
+const { nome, email, senha } = req.body;
 
-    const tipo = "usuario"; // todo usuário cadastrado será comum
+const tipo = "usuario";
 
-    const sql = "INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)";
+const sql = "INSERT INTO usuarios (nome, email, senha, tipo) VALUES (?, ?, ?, ?)";
 
-    db.query(sql, [nome, email, senha, tipo], (err, result) => {
+db.query(sql, [nome, email, senha, tipo], (err, result) => {
 
-        if (err) {
-            console.log(err);
-            res.status(500).json(err);
-            return;
-        }
+if (err) {
+console.log(err);
+res.status(500).json(err);
+return;
+}
 
-        res.json({
-            mensagem: "Usuário cadastrado com sucesso!"
-        });
+res.json({
+mensagem: "Usuário cadastrado com sucesso!"
+});
 
-    });
+});
 
 });
 
@@ -78,8 +74,4 @@ app.listen(3000,()=>{
 
 console.log("Servidor rodando na porta 3000");
 
-=======
-app.listen(3000, () => {
-    console.log("Servidor rodando na porta 3000");
->>>>>>> b9a8ca6b36d28ddc576c23f73d57ee62037b10c9
 });

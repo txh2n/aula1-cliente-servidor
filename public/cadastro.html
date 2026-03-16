@@ -5,38 +5,26 @@
 <title>Cadastro</title>
 <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <header>
+        <h1>Cadastro de Usuário</h1>
+    </header>
+    <main>
+        <section class="formulario">
+        <h2>Criar conta</h2>
+            <form id="formCadastro">
 
-<header>
-<h1>Cadastro de Usuário</h1>
-</header>
+                <input type="text" id="nome" placeholder="Nome">
 
-<main>
+                <input type="email" id="email" placeholder="Email">
 
-<section class="formulario">
+                <input type="password" id="senha" placeholder="Senha">
 
-<h2>Criar conta</h2>
-
-<form id="formCadastro">
-
-<input type="text" id="nome" placeholder="Nome" required>
-
-<input type="email" id="email" placeholder="Email" required>
-
-<input type="password" id="senha" placeholder="Senha" required>
-
-<button type="submit">Cadastrar</button>
-
-</form>
-
-<a href="login.html">Voltar para login</a>
-
-</section>
-
-<script src="cadastro.js"></script>
-
-</main>
-
+                <button type="submit">Cadastrar</button>
+            </form> <br>
+            <a href="login.html">Voltar para login</a>
+        </section>
+    <script src="cadastro.js"></script>
+    </main>
 </body>
 </html>
