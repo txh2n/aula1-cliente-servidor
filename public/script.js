@@ -4,7 +4,7 @@ const form = document.getElementById("formFuncionario");
 const lista = document.getElementById("listaFuncionarios");
 
 // URL da API hospedada no Vercel
-const API = "https://sistema-de-cadastro-de-funcionarios-9utvo2539.vercel.app/funcionarios";
+const API = "https://aula1-cliente-servidor-nine.vercel.app/funcionarios";
 
 // Redireciona para login se não estiver logado
 if (!tipoUsuario) {

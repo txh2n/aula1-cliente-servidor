@@ -15,7 +15,7 @@ app.use(express.static("public"));
 app.get("/favicon.ico", (req, res) => res.sendFile(path.join(__dirname, "public", "favicon.ico")));
 
 // Rota raiz
-app.get("/", (req, res) => res.send("API Funcionários rodando!"));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
 
 // Rotas de funcionários
 app.use("/", alunosRoutes);

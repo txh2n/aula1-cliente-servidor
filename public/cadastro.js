@@ -8,7 +8,7 @@ form.addEventListener("submit", function(e){
     const email = document.getElementById("email").value;
     const senha = document.getElementById("senha").value;
 
-    fetch("https://sistema-de-cadastro-de-funcionarios-9utvo2539.vercel.app/usuarios",{
+    fetch("https://aula1-cliente-servidor-nine.vercel.app/usuarios",{
 
         method:"POST",
 
