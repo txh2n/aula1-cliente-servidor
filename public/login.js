@@ -9,7 +9,7 @@ form.addEventListener("submit", function(e){
 
     console.log(email, senha); // TESTE
 
-    fetch("http://localhost:3000/login",{
+    fetch("https://sistema-de-cadastro-de-funcionarios-9utvo2539.vercel.app/login",{
 
         method: "POST",
 

@@ -2,7 +2,7 @@ const tipoUsuario = localStorage.getItem("tipoUsuario");
 
 const form = document.getElementById("formFuncionario");
 const lista = document.getElementById("listaFuncionarios");
-const API = "http://localhost:3000/funcionarios";
+const API = "https://sistema-de-cadastro-de-funcionarios-9utvo2539.vercel.app/funcionarios";
 
 // Se não estiver logado volta para login
 if (!tipoUsuario) {
