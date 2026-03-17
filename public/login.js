@@ -9,17 +9,11 @@ form.addEventListener("submit", function(e){
 
     console.log(email, senha); // TESTE
 
-    fetch("https://aula1-cliente-servidor-nine.vercel.app/login",{
-
-        method: "POST",
-
-        headers:{s
-            "Content-Type":"application/json"
-        },
-
-        body: JSON.stringify({email, senha})
-
-    })
+    fetch("https://aula1-cliente-servidor-nine.vercel.app/login", {
+    method: "POST",
+    headers:{ "Content-Type":"application/json" },
+    body: JSON.stringify({email, senha})
+})
 
     .then(res => res.json())
     .then(data => {
