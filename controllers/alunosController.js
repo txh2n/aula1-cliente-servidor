@@ -1,75 +1,74 @@
 const db = require("../database/database");
 
-// ----------------------------
-// LISTAR FUNCIONÁRIOS
-// ----------------------------
+// Listar
 exports.listar = async (req, res) => {
-    const sql = "SELECT * FROM funcionarios ORDER BY id ASC";
-
-    try {
-        const result = await db.query(sql);
-        res.json(result.rows); // retorna sempre um array
-    } catch (err) {
-        console.error("Erro ao listar funcionários:", err);
-        res.status(500).json({ error: "Erro ao listar funcionários" });
-    }
+  try {
+    const result = await db.query("SELECT * FROM funcionarios ORDER BY id ASC");
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Erro ao listar funcionários:", err.message);
+    res.status(500).json({ error: err.message });
+  }
 };
 
-// ----------------------------
-// CADASTRAR FUNCIONÁRIO
-// ----------------------------
+// Cadastrar
 exports.cadastrar = async (req, res) => {
-    const { nome, cargo, salario, setor } = req.body;
+  const { nome, cargo, salario, setor } = req.body;
 
-    // RETURNING * retorna o registro criado
+  if (!nome || !cargo || !salario || !setor) {
+    return res.status(400).json({ error: "Todos os campos são obrigatórios" });
+  }
+
+  const salarioNumber = Number(salario);
+  if (isNaN(salarioNumber)) {
+    return res.status(400).json({ error: "Salário deve ser um número" });
+  }
+
+  try {
     const sql = "INSERT INTO funcionarios (nome, cargo, salario, setor) VALUES ($1,$2,$3,$4) RETURNING *";
-
-    try {
-        const result = await db.query(sql, [nome, cargo, salario, setor]);
-        res.json(result.rows[0]); // retorna o funcionário criado
-    } catch (err) {
-        console.error("Erro ao cadastrar funcionário:", err);
-        res.status(500).json({ error: "Erro ao cadastrar funcionário" });
-    }
+    const result = await db.query(sql, [nome, cargo, salarioNumber, setor]);
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Erro ao cadastrar funcionário:", err.message);
+    res.status(500).json({ error: err.message });
+  }
 };
 
-// ----------------------------
-// ATUALIZAR FUNCIONÁRIO
-// ----------------------------
+// Atualizar
 exports.atualizar = async (req, res) => {
-    const { id } = req.params;
-    const { cargo, salario } = req.body;
+  const { id } = req.params;
+  const { cargo, salario } = req.body;
 
-    // RETURNING * retorna o registro atualizado
+  if (!cargo || !salario) {
+    return res.status(400).json({ error: "Cargo e salário obrigatórios" });
+  }
+
+  const salarioNumber = Number(salario);
+  if (isNaN(salarioNumber)) {
+    return res.status(400).json({ error: "Salário deve ser um número" });
+  }
+
+  try {
     const sql = "UPDATE funcionarios SET cargo=$1, salario=$2 WHERE id=$3 RETURNING *";
-
-    try {
-        const result = await db.query(sql, [cargo, salario, id]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Funcionário não encontrado" });
-        }
-        res.json(result.rows[0]); // retorna o funcionário atualizado
-    } catch (err) {
-        console.error("Erro ao atualizar funcionário:", err);
-        res.status(500).json({ error: "Erro ao atualizar funcionário" });
-    }
+    const result = await db.query(sql, [cargo, salarioNumber, id]);
+    if (result.rows.length === 0) return res.status(404).json({ error: "Funcionário não encontrado" });
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Erro ao atualizar funcionário:", err.message);
+    res.status(500).json({ error: err.message });
+  }
 };
 
-// ----------------------------
-// EXCLUIR FUNCIONÁRIO
-// ----------------------------
+// Excluir
 exports.excluir = async (req, res) => {
-    const { id } = req.params;
+  const { id } = req.params;
+  try {
     const sql = "DELETE FROM funcionarios WHERE id=$1 RETURNING *";
-
-    try {
-        const result = await db.query(sql, [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Funcionário não encontrado" });
-        }
-        res.json({ mensagem: "Funcionário excluído com sucesso!" });
-    } catch (err) {
-        console.error("Erro ao excluir funcionário:", err);
-        res.status(500).json({ error: "Erro ao excluir funcionário" });
-    }
+    const result = await db.query(sql, [id]);
+    if (result.rows.length === 0) return res.status(404).json({ error: "Funcionário não encontrado" });
+    res.json({ mensagem: "Funcionário excluído com sucesso!" });
+  } catch (err) {
+    console.error("Erro ao excluir funcionário:", err.message);
+    res.status(500).json({ error: err.message });
+  }
 };
