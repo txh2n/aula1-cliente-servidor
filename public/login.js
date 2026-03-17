@@ -1,39 +1,43 @@
-const form=document.getElementById("formLogin");
+const form = document.getElementById("formLogin");
 
-form.addEventListener("submit",function(e){
+form.addEventListener("submit", function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-const email=document.getElementById("email").value;
-const senha=document.getElementById("senha").value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
 
-fetch("http://localhost:3000/login",{
+    console.log(email, senha); // TESTE
 
-method:"POST",
+    fetch("http://localhost:3000/login",{
 
-headers:{
-"Content-Type":"application/json"
-},
+        method: "POST",
 
-body:JSON.stringify({email,senha})
+        headers:{
+            "Content-Type":"application/json"
+        },
 
-})
+        body: JSON.stringify({email, senha})
 
-.then(res=>res.json())
-.then(data=>{
+    })
 
-if(data.sucesso){
+    .then(res => res.json())
+    .then(data => {
 
-localStorage.setItem("tipoUsuario",data.tipo);
+        console.log(data); // TESTE
 
-window.location.href="index.html";
+        if(data.sucesso){
 
-}else{
+            localStorage.setItem("tipoUsuario", data.tipo);
 
-alert("Email ou senha inválidos");
+            window.location.href = "index.html";
 
-}
+        }else{
 
-});
+            alert("Email ou senha inválidos");
+
+        }
+
+    });
 
 });
